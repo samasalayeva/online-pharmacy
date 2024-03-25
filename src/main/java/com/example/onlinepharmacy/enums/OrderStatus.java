@@ -1,5 +1,5 @@
 package com.example.onlinepharmacy.enums;
 
 public enum OrderStatus {
-    NEW, PREPARING, ON_DELIVERY, DELIVERED
+    PREPARING, ON_THE_WAY, DELIVERED
 }

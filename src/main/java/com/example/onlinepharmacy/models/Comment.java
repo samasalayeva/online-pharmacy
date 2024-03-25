@@ -35,9 +35,6 @@ public class Comment {
     @JoinColumn(name = "product_id",referencedColumnName = "id")
     private Product product;
 
-    @OneToMany(mappedBy = "comment",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    private List<Like> likes;
-
     private boolean active;
 
     @CreationTimestamp

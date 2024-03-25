@@ -6,26 +6,25 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-
 @Entity
-@Table(name = "products")
+@Table(name = "images")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Product {
+public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
-    private String name;
-    private String description;
-    private BigDecimal price;
-    private Integer stock;
+
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    private String imageId;
 
 
     @ManyToOne
-    @JoinColumn(name="category_id")
-    private Category category;
+    @JoinColumn(name = "product_id",referencedColumnName = "id")
+    private Product product;
 }

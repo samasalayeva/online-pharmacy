@@ -8,30 +8,32 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.keycloak.admin.client.resource.UserResource;
 
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "likes")
+@Table(name = "rates")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @Builder
-public class Like {
-
+public class Rate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private double rate;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User user;
 
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "comment_id", referencedColumnName = "id")
-    Comment comment;
+    @JoinColumn(name = "product_id",referencedColumnName = "id")
+    Product product;
 
 
     @CreationTimestamp
@@ -39,5 +41,4 @@ public class Like {
 
     @UpdateTimestamp
     private LocalDate lastUpdate;
-
 }

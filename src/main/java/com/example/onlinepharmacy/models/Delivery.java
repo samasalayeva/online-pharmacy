@@ -1,6 +1,5 @@
 package com.example.onlinepharmacy.models;
 
-import com.example.onlinepharmacy.enums.DeliveryStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,8 +24,5 @@ public class Delivery {
     @OneToOne
     @JoinColumn(name = "delivery_address_id")
     private Address deliveryAddress;
-    @Enumerated(EnumType.STRING)
-    private DeliveryStatus deliveryStatus;
-
 
 }

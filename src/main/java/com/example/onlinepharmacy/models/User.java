@@ -24,13 +24,13 @@ public class User {
     private String surname;
     private String password;
     private String email;
-    private String phone;
+
     @Enumerated(EnumType.STRING)
     private Role role;
     private LocalDate registrationDate;
 
     private boolean active;
 
-    @OneToMany
+    @ManyToOne
     private Address address;
 }
