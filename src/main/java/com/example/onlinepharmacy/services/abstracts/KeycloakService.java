@@ -1,5 +1,6 @@
 package com.example.onlinepharmacy.services.abstracts;
 
+import com.example.onlinepharmacy.dtos.request.UpdateUserRequest;
 import com.example.onlinepharmacy.dtos.request.UserDTO;
 import org.keycloak.representations.idm.UserRepresentation;
 
@@ -9,9 +10,12 @@ public interface KeycloakService {
 
     List<UserRepresentation> findAllUsers();
     List<UserRepresentation> searchUserByUsername(String username);
-    String createUser(UserDTO userDTO);
+    boolean registerToKeycloak(UserDTO userDTO);
     void deleteUser(String userId);
-    void updateUser(String userId, UserDTO userDTO);
-
+    void updateUser(String userId, UpdateUserRequest request);
     void emailVerification(String userId);
+    void assignRole(String userId, String roleName);
+    void forgotPassword(String email);
+    void updatePassword(String userId);
+    void blockUser(String userId);
 }

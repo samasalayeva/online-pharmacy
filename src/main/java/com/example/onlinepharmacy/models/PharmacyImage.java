@@ -1,5 +1,6 @@
 package com.example.onlinepharmacy.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,12 +8,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "images")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Image {
+public class PharmacyImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -24,7 +24,8 @@ public class Image {
     private String imageId;
 
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "product_id",referencedColumnName = "id")
-    private Product product;
+    @JoinColumn(name = "pharmacy_id",referencedColumnName = "id")
+    private Pharmacy pharmacy;
 }

@@ -1,6 +1,7 @@
 package com.example.onlinepharmacy.models;
 
 import com.example.onlinepharmacy.enums.OrderStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,33 +25,33 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 
-    private LocalDate orderDate;
-
-    private BigDecimal totalOrderPrice;
+    private LocalDate createdAt;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    @JsonManagedReference
-    @OneToMany
-    private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne
+    @JsonIgnore
+    @ManyToOne
+    private User user;
+
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems;
+
+    @ManyToOne
     @JoinColumn(name = "delivery_address_id")
     private Address deliveryAddress;
 
-    @Transient
-    public BigDecimal getTotalOrderPrice() {
-        BigDecimal sum = BigDecimal.ZERO;
+    private int totalItem;
 
-        for (OrderItem orderItem : orderItems) {
-            sum = sum.add(orderItem.getUnitPrice()
-                    .multiply(BigDecimal.valueOf(orderItem.getQuantity())));
-        }
-        return sum;
-    }
+    private BigDecimal totalPrice;
+
+    @JsonIgnore
+    @ManyToOne
+    private Pharmacy pharmacy;
+
+//    private Payment payment;
+
 }

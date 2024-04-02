@@ -1,11 +1,11 @@
 package com.example.onlinepharmacy.services.concrets;
 
 import com.example.onlinepharmacy.exceptions.NotFoundException;
-import com.example.onlinepharmacy.models.Image;
+import com.example.onlinepharmacy.models.ProductImage;
 import com.example.onlinepharmacy.models.Product;
-import com.example.onlinepharmacy.repositories.ImageRepository;
+import com.example.onlinepharmacy.repositories.ProductImageRepository;
 import com.example.onlinepharmacy.repositories.ProductRepository;
-import com.example.onlinepharmacy.services.abstracts.ImageService;
+import com.example.onlinepharmacy.services.abstracts.ProductImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,16 +17,16 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ImageServiceImpl implements ImageService {
-    private final ImageRepository imageRepository;
+public class ProductImageServiceImpl implements ProductImageService {
+    private final ProductImageRepository imageRepository;
     private final CloudinaryService cloudinaryService;
     private final ProductRepository productRepository;
 
-    public List<Image> getAll() {
+    public List<ProductImage> getAll() {
         return imageRepository.findAll();
     }
 
-    public Image getOne(Long id) {
+    public ProductImage getOne(Long id) {
         return imageRepository
                 .findById(id)
                 .orElseThrow(() -> new NotFoundException("This image does not found"));
@@ -39,7 +39,7 @@ public class ImageServiceImpl implements ImageService {
             throw new RuntimeException("The image is not valid!");
         }
         var result = cloudinaryService.upload(multipartFile);
-        Image image = Image.builder()
+        ProductImage image = ProductImage.builder()
                 .product(product)
                 .imageUrl(result.get("url").toString())
                 .imageId(result.get("public_id").toString()).build();
@@ -47,7 +47,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     public void delete(Long id) {
-        Image image = imageRepository.findById(id).orElseThrow(() -> new NotFoundException("This image does not found"));
+        ProductImage image = imageRepository.findById(id).orElseThrow(() -> new NotFoundException("This image does not found"));
         String cloudinaryId = image.getImageId();
         try {
             cloudinaryService.delete(cloudinaryId);

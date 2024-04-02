@@ -1,5 +1,6 @@
 package com.example.onlinepharmacy.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +19,7 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
@@ -27,5 +29,6 @@ public class OrderItem {
     private Product product;
 
     private int quantity;
-    private BigDecimal unitPrice;
+
+    private BigDecimal totalPrice;
 }

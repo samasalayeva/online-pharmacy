@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -23,9 +25,33 @@ public class Product {
     private String description;
     private BigDecimal price;
     private Integer stock;
-
+    private LocalDate creationDate;
 
     @ManyToOne
-    @JoinColumn(name="category_id")
+    private Pharmacy pharmacy;
+
+    @ManyToOne
+    private ProductType productType;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductImage> productImages = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", stock=" + stock +
+                ", creationDate=" + creationDate +
+                ", pharmacy=" + pharmacy.getName() +
+                ", productType=" + productType.getName() +
+                ", category=" + category.getName() +
+                '}';
+    }
 }

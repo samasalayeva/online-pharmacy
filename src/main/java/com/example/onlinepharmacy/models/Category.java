@@ -1,5 +1,6 @@
 package com.example.onlinepharmacy.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,4 +19,7 @@ public class Category {
     private Long id;
     private String name;
 
+    @ManyToOne
+    @JsonIgnore
+    private Pharmacy pharmacy;
 }

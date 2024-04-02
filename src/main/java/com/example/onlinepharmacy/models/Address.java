@@ -1,5 +1,6 @@
 package com.example.onlinepharmacy.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,5 +22,9 @@ public class Address {
     private String postalCode;
     private String country;
     private String phone;
+
+    @JsonIgnore
+    @ManyToOne
+    private User user;
 
 }

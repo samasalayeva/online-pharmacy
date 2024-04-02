@@ -1,5 +1,6 @@
 package com.example.onlinepharmacy.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,22 +8,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "product_Types")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class Delivery {
+public class ProductType {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String name;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
-
-
-    @OneToOne
-    @JoinColumn(name = "delivery_address_id")
-    private Address deliveryAddress;
-
+    @JsonIgnore
+    private Pharmacy pharmacy;
 }

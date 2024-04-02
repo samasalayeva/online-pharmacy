@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: online-pharmacy
+  datasource:
+    password: 12345
+    url: jdbc:postgresql://localhost:5432/online-pharmacy-api
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    open-in-view: true
+
+  security:
+    oauth2:
+     resource server:
+        jwt:
+          issuer-uri: http://localhost:8181/realms/spring-boot-keycloak
+          jwk-set-uri: http://localhost:8181/realms/spring-boot-keycloak/protocol/openid-connect/certs
+
+jwt:
+  auth:
+    converter:
+      principle-attribute: preferred_username
+      resource-id: online-pharmacy
+logging:
+  level:
+    org:
+      keycloak: DEBUG
+
+cloudinary:
+  cloud_name: ${CLOUD_NAME}
+  api_key: ${API_KEY}
+  api_secret: ${API_SECRET}
+
+stripe:
+  api:
+    key: ${STRIPE_SECRET_KEY}

@@ -1,10 +1,13 @@
 package com.example.onlinepharmacy.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
 
 @Entity
 @Data
@@ -17,6 +20,7 @@ public class CartItem {
     private Long id;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
@@ -25,6 +29,8 @@ public class CartItem {
     private Product product;
 
     private int quantity;
+
+    private BigDecimal totalPrice;
 
 
 }
