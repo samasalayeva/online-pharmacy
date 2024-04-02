@@ -23,7 +23,7 @@ public class SecurityConfig {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(http -> {
-                    http.requestMatchers("/create-user","/keycloak/user/register, /keycloak/user/{userId}/send-verify-email").permitAll();
+                    http.requestMatchers("/keycloak/user/register", "/keycloak/user/forgot-password/email/{email}").permitAll();
                     http.anyRequest().authenticated();
                 })
                 .oauth2ResourceServer(oauth -> {
@@ -32,4 +32,5 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .build();
     }
+
 }

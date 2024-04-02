@@ -13,7 +13,7 @@ spring:
 
   security:
     oauth2:
-     resourceserver:
+     resource server:
         jwt:
           issuer-uri: http://localhost:8181/realms/spring-boot-keycloak
           jwk-set-uri: http://localhost:8181/realms/spring-boot-keycloak/protocol/openid-connect/certs
@@ -33,5 +33,5 @@ cloudinary:
   api_key: ${API_KEY}
   api_secret: ${API_SECRET}
 
-server:
-  port: 9090
+#server:
+#  port: 9090

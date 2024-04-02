@@ -1,6 +1,5 @@
 package com.example.onlinepharmacy.models;
 
-import com.example.onlinepharmacy.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,12 +24,10 @@ public class User {
     private String password;
     private String email;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+
     private LocalDate registrationDate;
 
     private boolean active;
 
-    @ManyToOne
-    private Address address;
+
 }

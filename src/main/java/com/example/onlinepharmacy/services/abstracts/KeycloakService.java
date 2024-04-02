@@ -12,6 +12,8 @@ public interface KeycloakService {
     String createUser(UserDTO userDTO);
     void deleteUser(String userId);
     void updateUser(String userId, UserDTO userDTO);
-
     void emailVerification(String userId);
+    void assignRole(String userId, String roleName);
+    void forgotPassword(String email);
+    void updatePassword(String userId);
 }

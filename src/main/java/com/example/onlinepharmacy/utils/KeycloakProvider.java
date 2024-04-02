@@ -4,6 +4,8 @@ import org.jboss.resteasy.client.jaxrs.internal.ResteasyClientBuilderImpl;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
 import org.keycloak.admin.client.resource.RealmResource;
+import org.keycloak.admin.client.resource.RolesResource;
+import org.keycloak.admin.client.resource.UserResource;
 import org.keycloak.admin.client.resource.UsersResource;
 public class KeycloakProvider {
     private static final String SERVER_URL = "http://localhost:8181";
@@ -12,7 +14,7 @@ public class KeycloakProvider {
     private static final String ADMIN_CLI = "admin-cli";
     private static final String USER_CONSOLE = "admin";
     private static final String PASSWORD_CONSOLE = "admin";
-    private static final String CLIENT_SECRET = "CBVUvGkkzQNuQuolJ5pG1nAMH53rjwAV";
+    private static final String CLIENT_SECRET = "DfAZYr7yz8dyRYbSHgQDnTGfnYszxTt9";
 
     public static RealmResource getRealmResource() {
         Keycloak keycloak = KeycloakBuilder.builder()
@@ -30,8 +32,12 @@ public class KeycloakProvider {
         return keycloak.realm(REALM_NAME);
     }
 
-    public static UsersResource getUserResource() {
+    public static UsersResource getUsersResource() {
         RealmResource realmResource = getRealmResource();
         return realmResource.users();
+    }
+    public static UserResource getUserResource(String userId){
+        UsersResource usersResource = getUsersResource();
+        return usersResource.get(userId);
     }
 }
